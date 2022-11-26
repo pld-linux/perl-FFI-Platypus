@@ -6,18 +6,21 @@
 %define		pnam	Platypus
 Summary:	FFI::Platypus - Write Perl bindings to non-Perl libraries with FFI. No XS required.
 Name:		perl-FFI-Platypus
-Version:	1.28
+Version:	2.05
 Release:	1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-module/FFI/%{pdir}-%{pnam}-%{version}.tar.gz
-# Source0-md5:	fe23d49d5822adf1355a6b32157728a7
+# Source0-md5:	745160cd773ddf03b77a965486fbab67
 URL:		http://search.cpan.org/dist/FFI-Platypus/
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	perl-Capture-Tiny
 BuildRequires:	perl-FFI-CheckLib
 BuildRequires:	perl-IPC-Cmd
+%if %{with tests}
+BuildRequires:	perl-Test2
+%endif
 BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -73,6 +76,8 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorarch}/FFI/Build/File/Object.pm
 %{perl_vendorarch}/FFI/Build/MM.pm
 %{perl_vendorarch}/FFI/Build/Platform.pm
+%{perl_vendorarch}/FFI/Build/Plugin.pm
+%{perl_vendorarch}/FFI/Build/PluginData.pm
 %{perl_vendorarch}/FFI/Platypus.pm
 %dir %{perl_vendorarch}/FFI/Platypus
 %{perl_vendorarch}/FFI/Platypus/API.pm
@@ -81,7 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorarch}/FFI/Platypus/Closure.pm
 %{perl_vendorarch}/FFI/Platypus/Constant.pm
 %{perl_vendorarch}/FFI/Platypus/DL.pm
-%{perl_vendorarch}/FFI/Platypus/Declare.pm
+#%{perl_vendorarch}/FFI/Platypus/Declare.pm
 %{perl_vendorarch}/FFI/Platypus/Function.pm
 %{perl_vendorarch}/FFI/Platypus/Internal.pm
 %{perl_vendorarch}/FFI/Platypus/Lang.pm
@@ -101,10 +106,12 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorarch}/FFI/Platypus/Type/PointerSizeBuffer.pm
 %{perl_vendorarch}/FFI/Platypus/Type/StringArray.pm
 %{perl_vendorarch}/FFI/Platypus/Type/StringPointer.pm
+%{perl_vendorarch}/FFI/Platypus/Type/WideString.pm
 %{perl_vendorarch}/FFI/Platypus/TypeParser.pm
 %dir %{perl_vendorarch}/FFI/Platypus/TypeParser
 %{perl_vendorarch}/FFI/Platypus/TypeParser/Version0.pm
 %{perl_vendorarch}/FFI/Platypus/TypeParser/Version1.pm
+%{perl_vendorarch}/FFI/Platypus/TypeParser/Version2.pm
 %{perl_vendorarch}/FFI/Probe.pm
 %dir %{perl_vendorarch}/FFI/Probe
 %{perl_vendorarch}/FFI/Probe/Runner.pm
